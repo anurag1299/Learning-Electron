@@ -69,6 +69,7 @@ function createWindow() {
 
 ipc.on("open-error-dialog", function(event) {
   dialog.showErrorBox("an error message", "demo of error");
+  event.sender.send("opened-error-dialog", "main process opened error message");
 });
 
 app.on("ready", createWindow);

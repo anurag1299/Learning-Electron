@@ -8,3 +8,7 @@ const errorbtn = document.getElementById("errorButton");
 errorbtn.addEventListener("click", function() {
   ipc.send("open-error-dialog");
 });
+
+ipc.on("opened-error-dialog", function(event, arg) {
+  console.log(arg);
+});
