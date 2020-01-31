@@ -4,24 +4,31 @@ const browserWindow = electron.BrowserWindow;
 const path = require("path");
 const url = require("url");
 
+const ipc = electron.ipcMain;
+
+const dialog = electron.dialog;
+
 let win;
-let child;
+// let child;
 
 function createWindow() {
-  win = new browserWindow({ title: "parent" });
-  child = new browserWindow({
-    modal: true,
-
-    title: "child",
-    width: 500,
-    height: 150,
-    parent: win,
-    frame: false,
-    webPreferences: {
-      nodeIntegration: true
-    },
-    show: false
+  win = new browserWindow({
+    title: "parent",
+    webPreferences: { nodeIntegration: true }
   });
+  // child = new browserWindow({
+  //   modal: true,
+
+  //   title: "child",
+  //   width: 500,
+  //   height: 150,
+  //   parent: win,
+  //   frame: false,
+  //   webPreferences: {
+  //     nodeIntegration: true
+  //   },
+  //   show: false
+  // });
 
   win.loadURL(
     url.format({
@@ -33,20 +40,20 @@ function createWindow() {
 
   // child.loadURL("http://anurag-shopping-list.herokuapp.com/");
 
-  child.loadURL(
-    url.format({
-      pathname: path.join(__dirname, "child.html"),
-      protocol: "file",
-      slashes: "true"
-    })
-  );
+  // child.loadURL(
+  //   url.format({
+  //     pathname: path.join(__dirname, "child.html"),
+  //     protocol: "file",
+  //     slashes: "true"
+  //   })
+  // );
 
-  child.once("ready-to-show", () => {
-    child.show();
-  });
+  // child.once("ready-to-show", () => {
+  //   child.show();
+  // });
 
-  // win.webContents.openDevTools();
-  child.webContents.openDevTools();
+  win.webContents.openDevTools();
+  // child.webContents.openDevTools();
 
   // child.show();
   // win.show();
@@ -55,9 +62,13 @@ function createWindow() {
     win = null;
   });
 
-  child.on("closed", () => {
-    child = null;
-  });
+  // child.on("closed", () => {
+  //   child = null;
+  // });
 }
+
+ipc.on("open-error-dialog", function(event) {
+  dialog.showErrorBox("an error message", "demo of error");
+});
 
 app.on("ready", createWindow);
