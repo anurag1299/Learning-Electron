@@ -67,9 +67,13 @@ function createWindow() {
   // });
 }
 
-ipc.on("open-error-dialog", function(event) {
-  dialog.showErrorBox("an error message", "demo of error");
-  event.sender.send("opened-error-dialog", "main process opened error message");
+ipc.on("async-msg", function(event) {
+  // dialog.showErrorBox("an error message", "demo of error");
+  event.sender.send("async-reply", "main process opened error message");
+});
+
+ipc.on("sync-msg", function(event) {
+  event.returnValue = "sync-reply";
 });
 
 app.on("ready", createWindow);
