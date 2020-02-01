@@ -12,6 +12,7 @@ const dialog = electron.dialog;
 const globalShortcuts = electron.globalShortcut;
 const iconPath = path.join(__dirname, "electron.png");
 let win;
+let tray = null;
 // let child;
 
 // function createWindow() {
@@ -160,5 +161,38 @@ let win;
 // });
 
 app.on("ready", function() {
-  new Tray(iconPath);
+  tray = new Tray(iconPath);
+  let template = [
+    {
+      label: "Audio",
+      submenu: [
+        {
+          label: "Low",
+          type: "radio",
+          checked: true
+        },
+        {
+          label: "high",
+          type: "radio"
+        }
+      ]
+    },
+    {
+      label: "Video",
+      submenu: [
+        {
+          label: "1280x720",
+          type: "radio",
+          checked: true
+        },
+        {
+          label: "1920x1080",
+          type: "radio"
+        }
+      ]
+    }
+  ];
+
+  const ctxMenu = Menu.buildFromTemplate(template);
+  tray.setContextMenu(ctxMenu);
 });
