@@ -4,6 +4,7 @@ const browserWindow = electron.BrowserWindow;
 const path = require("path");
 const url = require("url");
 const Menu = electron.Menu;
+const MenuItem = electron.MenuItem;
 
 const ipc = electron.ipcMain;
 
@@ -125,4 +126,15 @@ app.on("ready", function() {
   ];
   const menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
+
+  const ctxMenu = new Menu();
+  ctxMenu.append(
+    new MenuItem({
+      label: "hello"
+    })
+  );
+
+  win.webContents.on("context-menu", function(e, params) {
+    ctxMenu.popup(win, params.x, params.y);
+  });
 });
