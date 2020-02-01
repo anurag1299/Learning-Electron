@@ -1,12 +1,31 @@
 <html>
   <head>
     <title>Hello world app</title>
+    <link rel="stylesheet" href="photon.min.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Hello World</h1>
+    <!-- <h1>Hello World</h1> -->
     <!-- <button id="asyncBtn">async</button>
     <button id="syncBtn">sync</button> -->
     <!-- <button id="openBtn">Open</button> -->
+    <div class="mainWrapper">
+      <h1 style="color: chartreuse;">File CRUDer</h1>
+      <form>
+        <div class="form-group">
+          <label class="label">File Name</label>
+          <input type="text" class="form-control" id="fileName" />
+        </div>
+        <div class="form-group">
+          <label class="label">Content</label>
+          <textarea class="form-control" id="fileContents" rows="5"></textarea>
+        </div>
+      </form>
+      <button id="btnCreate" class="btn btn-default">Create</button>
+      <button id="btnRead" class="btn btn-default">Read</button>
+
+      <button id="btnDelete" class="btn btn-default">Delete</button>
+    </div>
   </body>
   <script src="./index.js"></script>
 </html>

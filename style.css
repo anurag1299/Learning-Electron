@@ -1,9 +1,19 @@
 body {
   background-color: #222233;
-  color: #aaccff;
+  /* color: #aaccff; */
   font-family: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif";
   height: 150px;
-  overflow: hidden;
+  /* overflow: hidden; */
   border-radius: 5px;
   -webkit-app-region: drag;
+  font-size: 20px;
+}
+
+.mainWrapper {
+  margin: 25px;
+}
+
+.label {
+  color: #aaccff;
+  font-size: 25px;
 }
