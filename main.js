@@ -9,6 +9,7 @@ const MenuItem = electron.MenuItem;
 const ipc = electron.ipcMain;
 
 const dialog = electron.dialog;
+const globalShortcuts = electron.globalShortcut;
 
 let win;
 // let child;
@@ -147,5 +148,9 @@ app.on("ready", function() {
 
   win.webContents.on("context-menu", function(e, params) {
     ctxMenu.popup(win, params.x, params.y);
+  });
+
+  globalShortcuts.register("Alt + 1", function() {
+    win.show();
   });
 });
