@@ -3,6 +3,7 @@ const app = electron.app;
 const browserWindow = electron.BrowserWindow;
 const path = require("path");
 const url = require("url");
+const Menu = electron.Menu;
 
 const ipc = electron.ipcMain;
 
@@ -67,13 +68,22 @@ function createWindow() {
   // });
 }
 
-ipc.on("async-msg", function(event) {
-  // dialog.showErrorBox("an error message", "demo of error");
-  event.sender.send("async-reply", "main process opened error message");
-});
+// ipc.on("async-msg", function(event) {
+//   // dialog.showErrorBox("an error message", "demo of error");
+//   event.sender.send("async-reply", "main process opened error message");
+// });
 
-ipc.on("sync-msg", function(event) {
-  event.returnValue = "sync-reply";
-});
+// ipc.on("sync-msg", function(event) {
+//   event.returnValue = "sync-reply";
+// });
 
-app.on("ready", createWindow);
+app.on("ready", function() {
+  createWindow();
+  const template = [
+    {
+      label: "demo"
+    }
+  ];
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
+});

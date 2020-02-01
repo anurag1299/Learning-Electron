@@ -1,25 +1,25 @@
 console.log("I am Main");
 
-const electron = require("electron");
-const ipc = electron.ipcRenderer;
+// const electron = require("electron");
+// const ipc = electron.ipcRenderer;
 
-const errorbtn = document.getElementById("asyncBtn");
+// const errorbtn = document.getElementById("asyncBtn");
 
-errorbtn.addEventListener("click", function() {
-  console.log("async msg 1");
-  ipc.send("async-msg");
-  console.log("async msg 2");
-});
+// errorbtn.addEventListener("click", function() {
+//   console.log("async msg 1");
+//   ipc.send("async-msg");
+//   console.log("async msg 2");
+// });
 
-const syncBtn = document.getElementById("syncBtn");
+// const syncBtn = document.getElementById("syncBtn");
 
-syncBtn.addEventListener("click", function() {
-  console.log("sync msg 1");
-  const reply = ipc.sendSync("sync-msg");
-  console.log(reply);
-  console.log("sync msg 2");
-});
+// syncBtn.addEventListener("click", function() {
+//   console.log("sync msg 1");
+//   const reply = ipc.sendSync("sync-msg");
+//   console.log(reply);
+//   console.log("sync msg 2");
+// });
 
-ipc.on("async-reply", function(event, arg) {
-  console.log(arg);
-});
+// ipc.on("async-reply", function(event, arg) {
+//   console.log(arg);
+// });
