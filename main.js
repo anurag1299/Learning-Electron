@@ -53,7 +53,6 @@ function createWindow() {
   //   child.show();
   // });
 
-  win.webContents.openDevTools();
   // child.webContents.openDevTools();
 
   // child.show();
@@ -84,12 +83,30 @@ app.on("ready", function() {
       label: "demo",
       submenu: [
         {
-          label: "submenu1"
+          label: "submenu1",
+          click: function() {
+            console.log("clicked submenu 1");
+          }
+        },
+        {
+          type: "separator"
         },
         {
           label: "submenu2"
         }
       ]
+    },
+    {
+      label: "help",
+      click: function() {
+        electron.shell.openExternal("http://electron.atom.io");
+      }
+    },
+    {
+      label: "developer",
+      click: function() {
+        win.webContents.openDevTools();
+      }
     }
   ];
   const menu = Menu.buildFromTemplate(template);
