@@ -113,15 +113,22 @@ app.on("ready", function() {
     },
     {
       label: "help",
-      click: function() {
-        electron.shell.openExternal("http://electron.atom.io");
-      }
+      submenu: [
+        {
+          label: "about electron",
+          click: function() {
+            electron.shell.openExternal("http://electron.atom.io");
+          },
+          accelerator: "CmdOrCtrl + Shift + H"
+        }
+      ]
     },
     {
       label: "developer",
       click: function() {
         win.webContents.openDevTools();
-      }
+      },
+      accelerator: "F11"
     }
   ];
   const menu = Menu.buildFromTemplate(template);
