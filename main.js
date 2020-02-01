@@ -130,9 +130,13 @@ app.on("ready", function() {
   const ctxMenu = new Menu();
   ctxMenu.append(
     new MenuItem({
-      label: "hello"
+      label: "hello",
+      click: function() {
+        console.log("context menu item clicked");
+      }
     })
   );
+  ctxMenu.append(new MenuItem({ role: "selectAll" }));
 
   win.webContents.on("context-menu", function(e, params) {
     ctxMenu.popup(win, params.x, params.y);
