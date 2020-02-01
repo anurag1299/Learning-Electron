@@ -24,11 +24,11 @@ console.log("I am Main");
 //   console.log(arg);
 // });
 
-const openBtn = document.getElementById("openBtn");
-const shell = require("electron").shell;
+// const openBtn = document.getElementById("openBtn");
+// const shell = require("electron").shell;
 
-openBtn.addEventListener("click", function(event) {
-  shell.showItemInFolder("./sample.txt");
-  shell.openItem("./mainDoodle.png");
-  shell.openExternal("http://electron.atom.io");
-});
+// openBtn.addEventListener("click", function(event) {
+//   shell.showItemInFolder("./sample.txt");
+//   shell.openItem("./electron.png");
+//   shell.openExternal("http://electron.atom.io");
+// });
