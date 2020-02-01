@@ -81,7 +81,15 @@ app.on("ready", function() {
   createWindow();
   const template = [
     {
-      label: "demo"
+      label: "demo",
+      submenu: [
+        {
+          label: "submenu1"
+        },
+        {
+          label: "submenu2"
+        }
+      ]
     }
   ];
   const menu = Menu.buildFromTemplate(template);
