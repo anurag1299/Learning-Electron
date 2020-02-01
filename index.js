@@ -23,3 +23,12 @@ console.log("I am Main");
 // ipc.on("async-reply", function(event, arg) {
 //   console.log(arg);
 // });
+
+const openBtn = document.getElementById("openBtn");
+const shell = require("electron").shell;
+
+openBtn.addEventListener("click", function(event) {
+  shell.showItemInFolder("./sample.txt");
+  shell.openItem("./mainDoodle.png");
+  shell.openExternal("http://electron.atom.io");
+});

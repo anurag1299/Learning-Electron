@@ -78,6 +78,10 @@ function createWindow() {
 //   event.returnValue = "sync-reply";
 // });
 
+app.on("will-quit", function() {
+  globalShortcuts.unregisterAll();
+});
+
 app.on("ready", function() {
   createWindow();
   const template = [
