@@ -15,60 +15,60 @@ let win;
 let tray = null;
 // let child;
 
-// function createWindow() {
-//   win = new browserWindow({
-//     title: "parent",
-//     webPreferences: { nodeIntegration: true }
-//   });
-//   // child = new browserWindow({
-//   //   modal: true,
+function createWindow() {
+  win = new browserWindow({
+    title: "parent",
+    webPreferences: { nodeIntegration: true }
+  });
+  // child = new browserWindow({
+  //   modal: true,
 
-//   //   title: "child",
-//   //   width: 500,
-//   //   height: 150,
-//   //   parent: win,
-//   //   frame: false,
-//   //   webPreferences: {
-//   //     nodeIntegration: true
-//   //   },
-//   //   show: false
-//   // });
+  //   title: "child",
+  //   width: 500,
+  //   height: 150,
+  //   parent: win,
+  //   frame: false,
+  //   webPreferences: {
+  //     nodeIntegration: true
+  //   },
+  //   show: false
+  // });
 
-//   win.loadURL(
-//     url.format({
-//       pathname: path.join(__dirname, "index.html"),
-//       protocol: "file",
-//       slashes: "true"
-//     })
-//   );
+  win.loadURL(
+    url.format({
+      pathname: path.join(__dirname, "index.html"),
+      protocol: "file",
+      slashes: "true"
+    })
+  );
 
-//   // child.loadURL("http://anurag-shopping-list.herokuapp.com/");
+  // child.loadURL("http://anurag-shopping-list.herokuapp.com/");
 
-//   // child.loadURL(
-//   //   url.format({
-//   //     pathname: path.join(__dirname, "child.html"),
-//   //     protocol: "file",
-//   //     slashes: "true"
-//   //   })
-//   // );
+  // child.loadURL(
+  //   url.format({
+  //     pathname: path.join(__dirname, "child.html"),
+  //     protocol: "file",
+  //     slashes: "true"
+  //   })
+  // );
 
-//   // child.once("ready-to-show", () => {
-//   //   child.show();
-//   // });
+  // child.once("ready-to-show", () => {
+  //   child.show();
+  // });
 
-//   // child.webContents.openDevTools();
+  // child.webContents.openDevTools();
 
-//   // child.show();
-//   // win.show();
+  // child.show();
+  // win.show();
 
-//   win.on("closed", () => {
-//     win = null;
-//   });
+  win.on("closed", () => {
+    win = null;
+  });
 
-//   // child.on("closed", () => {
-//   //   child = null;
-//   // });
-// }
+  // child.on("closed", () => {
+  //   child = null;
+  // });
+}
 
 // ipc.on("async-msg", function(event) {
 //   // dialog.showErrorBox("an error message", "demo of error");
@@ -79,90 +79,88 @@ let tray = null;
 //   event.returnValue = "sync-reply";
 // });
 
-// app.on("will-quit", function() {
-//   globalShortcuts.unregisterAll();
-// });
-
-// app.on("ready", function() {
-//   createWindow();
-//   const template = [
-//     {
-//       label: "Edit",
-//       submenu: [
-//         { role: "undo" },
-//         { role: "redo" },
-//         { type: "separator" },
-//         { role: "cut" },
-//         { role: "copy" },
-//         { role: "paste" },
-//         { role: "pasteandmatchstyle" },
-//         { role: "delete" },
-//         { role: "selectall" }
-//       ]
-//     },
-//     {
-//       label: "demo",
-//       submenu: [
-//         {
-//           label: "submenu1",
-//           click: function() {
-//             console.log("clicked submenu 1");
-//           }
-//         },
-//         {
-//           type: "separator"
-//         },
-//         {
-//           label: "submenu2"
-//         }
-//       ]
-//     },
-//     {
-//       label: "help",
-//       submenu: [
-//         {
-//           label: "about electron",
-//           click: function() {
-//             electron.shell.openExternal("http://electron.atom.io");
-//           },
-//           accelerator: "CmdOrCtrl + Shift + H"
-//         }
-//       ]
-//     },
-//     {
-//       label: "developer",
-//       click: function() {
-//         win.webContents.openDevTools();
-//       },
-//       accelerator: "F11"
-//     }
-//   ];
-//   const menu = Menu.buildFromTemplate(template);
-//   Menu.setApplicationMenu(menu);
-
-//   const ctxMenu = new Menu();
-//   ctxMenu.append(
-//     new MenuItem({
-//       label: "hello",
-//       click: function() {
-//         console.log("context menu item clicked");
-//       }
-//     })
-//   );
-//   ctxMenu.append(new MenuItem({ role: "selectAll" }));
-
-//   win.webContents.on("context-menu", function(e, params) {
-//     ctxMenu.popup(win, params.x, params.y);
-//   });
-
-//   globalShortcuts.register("Alt + 1", function() {
-//     win.show();
-//   });
-// });
+app.on("will-quit", function() {
+  globalShortcuts.unregisterAll();
+});
 
 app.on("ready", function() {
+  createWindow();
+  const template = [
+    {
+      label: "Edit",
+      submenu: [
+        { role: "undo" },
+        { role: "redo" },
+        { type: "separator" },
+        { role: "cut" },
+        { role: "copy" },
+        { role: "paste" },
+        { role: "pasteandmatchstyle" },
+        { role: "delete" },
+        { role: "selectall" }
+      ]
+    },
+    {
+      label: "demo",
+      submenu: [
+        {
+          label: "submenu1",
+          click: function() {
+            console.log("clicked submenu 1");
+          }
+        },
+        {
+          type: "separator"
+        },
+        {
+          label: "submenu2"
+        }
+      ]
+    },
+    {
+      label: "help",
+      submenu: [
+        {
+          label: "about electron",
+          click: function() {
+            electron.shell.openExternal("http://electron.atom.io");
+          },
+          accelerator: "CmdOrCtrl + Shift + H"
+        }
+      ]
+    },
+    {
+      label: "developer",
+      click: function() {
+        win.webContents.openDevTools();
+      },
+      accelerator: "F11"
+    }
+  ];
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
+
+  const ctxMenu = new Menu();
+  ctxMenu.append(
+    new MenuItem({
+      label: "hello",
+      click: function() {
+        console.log("context menu item clicked");
+      }
+    })
+  );
+  ctxMenu.append(new MenuItem({ role: "selectAll" }));
+
+  win.webContents.on("context-menu", function(e, params) {
+    ctxMenu.popup(win, params.x, params.y);
+  });
+
+  globalShortcuts.register("Alt + 1", function() {
+    win.show();
+  });
+
   tray = new Tray(iconPath);
-  let template = [
+  let template2 = [
     {
       label: "Audio",
       submenu: [
@@ -193,6 +191,7 @@ app.on("ready", function() {
     }
   ];
 
-  const ctxMenu = Menu.buildFromTemplate(template);
-  tray.setContextMenu(ctxMenu);
+  const ctxMenuTray = Menu.buildFromTemplate(template2);
+  tray.setContextMenu(ctxMenuTray);
+  tray.setToolTip("Hello-World");
 });
