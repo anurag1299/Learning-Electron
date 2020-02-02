@@ -64,7 +64,11 @@ btnCreate.addEventListener("click", function() {
       if (err) {
         dialog.showErrorBox("error", "" + err);
       } else {
-        dialog.showMessageBox("Success", "The file was created.");
+        dialog.showMessageBox(null, {
+          title: "Success",
+          buttons: ["OK"],
+          message: "The file was created"
+        });
       }
     });
   });
