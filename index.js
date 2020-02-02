@@ -35,6 +35,7 @@ console.log("I am Main");
 
 const fs = require("fs");
 const path = require("path");
+const { ipcRenderer } = require("electron");
 
 btnRead = document.getElementById("btnRead");
 
@@ -57,14 +58,23 @@ btnCreate.addEventListener("click", function() {
 });
 
 btnRead.addEventListener("click", function() {
-  let file = path.join(pathName, fileName.value);
+  // let file = path.join(pathName, fileName.value);
 
-  fs.readFile(file, function(err, data) {
-    if (err) {
-      return console.log(err);
-    }
-    fileContents.value = data;
-    console.log("The file was read");
+  // fs.readFile(file, function(err, data) {
+  //   if (err) {
+  //     return console.log(err);
+  //   }
+  //   fileContents.value = data;
+  //   console.log("The file was read");
+  // });
+  ipcRenderer.send("openFile", () => {
+    console.log("event sent");
+  });
+
+  ipcRenderer.on("fileData", (event, obj) => {
+    // document.write(data);
+    fileContents.value = obj.data;
+    fileName.value = obj.filepath;
   });
 });
 
