@@ -1,6 +1,6 @@
 console.log("I am Main");
 
-// const electron = require("electron");
+const electron = require("electron");
 // const ipc = electron.ipcRenderer;
 
 // const errorbtn = document.getElementById("asyncBtn");
@@ -36,6 +36,7 @@ console.log("I am Main");
 const fs = require("fs");
 const path = require("path");
 const { ipcRenderer } = require("electron");
+const dialog = require("electron").remote.dialog;
 
 btnRead = document.getElementById("btnRead");
 
@@ -47,13 +48,25 @@ fileContents = document.getElementById("fileContents");
 let pathName = path.join(__dirname, "Files");
 
 btnCreate.addEventListener("click", function() {
-  let file = path.join(pathName, fileName.value);
+  // let file = path.join(pathName, fileName.value);
   let contents = fileContents.value;
-  fs.writeFile(file, contents, function(err) {
-    if (err) {
-      return console.log(err);
-    }
-    console.log("The file was created");
+  // fs.writeFile(file, contents, function(err) {
+  //   if (err) {
+  //     return console.log(err);
+  //   }
+  //   console.log("The file was created");
+  // });
+  ipcRenderer.send("saveFile", () => {
+    console.log("Save event");
+  });
+  ipcRenderer.on("saveSelected", (event, path) => {
+    fs.writeFile(path, contents, function(err) {
+      if (err) {
+        dialog.showErrorBox("error", "" + err);
+      } else {
+        dialog.showMessageBox("Success", "The file was created.");
+      }
+    });
   });
 });
 
@@ -68,13 +81,13 @@ btnRead.addEventListener("click", function() {
   //   console.log("The file was read");
   // });
   ipcRenderer.send("openFile", () => {
-    console.log("event sent");
+    console.log("open sent");
   });
 
   ipcRenderer.on("fileData", (event, obj) => {
     // document.write(data);
     fileContents.value = obj.data;
-    fileName.value = obj.filepath;
+    // fileName.value = obj.filepath;
   });
 });
 

@@ -201,7 +201,7 @@ ipc.on("openFile", (event, path) => {
   const { dialog } = require("electron");
   const fs = require("fs");
   filePath = dialog.showOpenDialogSync();
-  // console.log(filePath);
+  console.log(filePath);
   if (filePath === undefined) {
     // console.log("HI11");
     dialog.showErrorBox("Error", "No File Selected");
@@ -226,5 +226,21 @@ ipc.on("openFile", (event, path) => {
       // console.log(filepath);
       event.sender.send("fileData", obj);
     });
+  }
+});
+
+ipc.on("saveFile", event => {
+  const { dialog } = require("electron");
+  const fs = require("fs");
+  filePath = dialog.showSaveDialogSync();
+  console.log(filePath);
+  if (filePath === undefined) {
+    dialog.showErrorBox("Error", "No File Selected");
+  } else {
+    saveFile(filePath);
+  }
+
+  function saveFile(filePath) {
+    event.sender.send("saveSelected", filePath);
   }
 });
