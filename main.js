@@ -244,3 +244,27 @@ ipc.on("saveFile", event => {
     event.sender.send("saveSelected", filePath);
   }
 });
+
+ipc.on("DeleteFile", event => {
+  const fs = require("fs");
+  filePath = dialog.showOpenDialogSync();
+  if (filePath === undefined) {
+    dialog.showErrorBox("Error", "No File Selected");
+  } else {
+    deleteFile(filePath[0]);
+  }
+
+  function deleteFile(filePath) {
+    fs.unlink(filePath, function(err) {
+      if (err) {
+        dialog.showErrorBox("Error", "" + err);
+      }
+
+      dialog.showMessageBox(null, {
+        title: "Success",
+        buttons: ["OK"],
+        message: "The file was deleted"
+      });
+    });
+  }
+});

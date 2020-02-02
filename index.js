@@ -96,14 +96,17 @@ btnRead.addEventListener("click", function() {
 });
 
 btnDelete.addEventListener("click", function() {
-  let file = path.join(pathName, fileName.value);
+  // let file = path.join(pathName, fileName.value);
 
-  fs.unlink(file, function(err) {
-    if (err) {
-      return console.log(err);
-    }
-    fileName.value = "";
-    fileContents.value = "";
-    console.log("The file was deleted");
+  // fs.unlink(file, function(err) {
+  //   if (err) {
+  //     return console.log(err);
+  //   }
+  //   fileName.value = "";
+  //   fileContents.value = "";
+  //   console.log("The file was deleted");
+  // });
+  ipcRenderer.send("DeleteFile", () => {
+    console.log("delete sent");
   });
 });
