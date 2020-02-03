@@ -197,33 +197,25 @@ app.on("ready", function() {
 });
 
 ipc.on("openFile", (event, path) => {
-  // console.log("HI");
   const { dialog } = require("electron");
   const fs = require("fs");
   filePath = dialog.showOpenDialogSync();
   console.log(filePath);
   if (filePath === undefined) {
-    // console.log("HI11");
     dialog.showErrorBox("Error", "No File Selected");
   } else {
-    // console.log("HI12");
     readFile(filePath[0]);
   }
 
   function readFile(filepath) {
-    // console.log("HI0");
-
     fs.readFile(filepath, "utf-8", (err, data) => {
-      // console.log("HI2");
       if (err) {
-        // console.log("HI3");
-
         alert("an error occured reading the file :" + err.message);
         return;
       }
-      // console.log("HI4");
+
       obj = { data, filepath };
-      // console.log(filepath);
+
       event.sender.send("fileData", obj);
     });
   }
